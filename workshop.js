@@ -197,7 +197,41 @@ function isPalindrome(inputString) {
 }
 
 function wrapCharacter(inputString) {
-
+    var count = 1;
+    var outputString = '';
+    var i = 0;
+    
+    //for(var i=0; i < inputString.length; i++)
+    
+    while(i < inputString.length)
+    {
+        if(count === 1)
+        {
+            if(inputString[i] === ' ')
+            {
+                i += 1; //go to next chr
+            }
+            else
+            {
+                outputString += inputString[i];
+                count += count;
+                i += 1;
+            }
+        }
+        else if(count === 41)
+        {
+            outputString = outputString + "\n";
+            count = 1; //set count to 1
+        }
+        else //count not 1 or 41
+        {
+            outputString += inputString[i];
+            count += 1;
+            i += 1;
+        }
+    }
+    console.log(outputString);
+    return outputString;
 }
 
 function wrapWord(inputString) {
