@@ -16,6 +16,6 @@ describe('bubbleSort', function() {
     });
 
     it('Should work with an empty array', function() {
-        expect(bubbleSort([])).to.equal([]); // could this test be broken?
+        expect(bubbleSort([])).to.deep.equal([]); // could this test be broken?
     });
 });

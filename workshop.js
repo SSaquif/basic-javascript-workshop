@@ -1,6 +1,6 @@
 function firstLetter(inputString) 
 {
-    if (inputString == undefined)
+    if (inputString === undefined || inputString.length === 0)
     {
         return undefined;
     }
@@ -9,54 +9,190 @@ function firstLetter(inputString)
 
 function lastLetter(inputString)
 {
-    if (inputString == undefined || inputString.length === 0)
+    if (inputString === undefined || inputString.length === 0)
     {
         return undefined;
     }
     return inputString.charAt(inputString.length-1);
 }
 
-function letterAtPosition(inputString, position) {
-
+function letterAtPosition(inputString, position)
+{
+    if (inputString === undefined || inputString.length === 0 || position < 0 || position > inputString.length)
+    {
+        return undefined;
+    }
+    return inputString.charAt(position);
 }
 
 function addTwoNumbers(num1, num2) {
+    if (typeof num1 !== 'number'|| typeof num2 !== 'number' || num1.length ===0 || num2.length === 0)
+    {
+        return;
+    }
+    return (num1 + num2);
 
 }
 
 function multiplyTwoNumbers(num1, num2) {
-
+    if (typeof num1 !== 'number'|| typeof num2 !== 'number' || num1.length ===0 || num2.length === 0)
+    {
+        return;
+    }
+    return (num1 * num2);
 }
 
 function calculator(operation, num1, num2) {
-
+    if (typeof num1 !== 'number'|| typeof num2 !== 'number' || num1.length === 0 || num2.length === 0)
+    {
+        return;
+    }
+    switch (operation) {
+        case 'add':
+            return num1+num2;    
+           
+        case 'sub':
+            return num1-num2;    
+           
+        case 'mult':
+            return num1*num2;    
+            
+        case 'div':
+            return num1/num2;    
+            
+        default:
+            return;
+    }
 }
 
 function repeatString(inputString, numRepetitions) {
-
+    if (typeof inputString !== 'string' || typeof numRepetitions !== 'number')
+    {
+        return undefined;
+    }
+    else if (numRepetitions <= 0)
+    {
+        return '';
+    }
+    else
+    {
+        var result = '';
+        for (var i = 0; i<numRepetitions; i++)
+        {
+            result = result.concat(inputString);
+        }
+        return result;
+    }
 }
 
 function reverseString(inputString) {
-
+    if (typeof inputString !== 'string')
+    {
+        return undefined;
+    }
+    return inputString.split('').reverse().join('');
 }
 
 function longestWord(inputString) {
-
+    if (typeof inputString !== 'string')
+    {
+        return undefined;
+    }
+    if (inputString.length === 0)
+    {
+        return inputString;
+    }
+    var stringArray = inputString.split(' '); //split at space
+    var word = stringArray[0]
+    for(var i = 1; i < stringArray.length; i++)
+    {
+        if (word.length < stringArray[i].length)
+        {
+            word = stringArray[i]
+        }
+    }
+    return word;
 }
 
 function capitalize(inputString) {
-
+    if (typeof inputString !== 'string')
+    {
+        return undefined;
+    }
+    if (inputString.length === 0)
+    {
+        return inputString;
+    }
+    inputString = inputString.toLowerCase(); //make it all lower case
+    var wordArray = inputString.split(' '); //split at space 
+    var outputString = '';
+    
+    for (var i = 0; i < wordArray.length; i++)
+    {
+        var currentWordLetters = wordArray[i].split(''); //split the word to letters
+        currentWordLetters[0] = currentWordLetters[0].toUpperCase(); // capitalize first letter
+        wordArray[i] = currentWordLetters.join('');
+    }
+    return wordArray.join(' '); //join the words from the array with space
 }
 
-function sumOfNumbers(arrayOfNumbers) {
-
+function sumOfNumbers(arrayOfNumbers)
+{
+    if(!Array.isArray(arrayOfNumbers))
+    {
+        return;
+    }
+    var sum = 0;
+    for(var i =0; i < arrayOfNumbers.length; i++)
+    {
+        if(typeof arrayOfNumbers[i] !== 'number')
+        {
+            return;
+        }
+        sum = sum + arrayOfNumbers[i];
+    }
+    return sum;
 }
 
-function uniqueElements(array1, array2) {
-
+function uniqueElements(array1, array2) 
+{
+    if(!Array.isArray(array1) || !Array.isArray(array2))
+    {
+        return;
+    }
+    var uniqueArray = [];
+    for (var i =0; i < array1.length; i++)
+    {
+        if(array2.indexOf(array1[i])< 0)
+        {
+            uniqueArray.push(array1[i]);
+        }    
+    }
+    
+    for (var i =0; i < array2.length; i++)
+    {
+        if(array1.indexOf(array2[i])< 0)
+        {
+            uniqueArray.push(array2[i]);
+        }    
+    }
+    return uniqueArray;
 }
 
 function isPalindrome(inputString) {
+    inputString = inputString.toLowerCase();
+    var editString = inputString.replace(/\W/gi, ''); //\W switch to replace all non letter or number characters
+    var reverseString = editString.split('').reverse().join('');
+    console.log(editString);
+    console.log(reverseString);
+    if (reverseString === editString)
+    {
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
 
 }
 
@@ -69,7 +205,35 @@ function wrapWord(inputString) {
 }
 
 function bubbleSort(arrayOfNumbers) {
-
+    var listSize = arrayOfNumbers.length;
+    
+    if (listSize === 0)
+    {
+        return arrayOfNumbers;
+    }
+    
+    var temp;
+    for (var i = 0; i <= listSize -1; i++)
+    {
+        var swapped = false;
+        for( var j = 0; j<= listSize -1; j++)
+        {
+            if(arrayOfNumbers[j] > arrayOfNumbers[j+1])
+            {
+                temp = arrayOfNumbers[j];
+                arrayOfNumbers[j] = arrayOfNumbers[j+1];
+                arrayOfNumbers[j+1]= temp
+                swapped = true;
+            }
+        }
+        if (swapped === false) //to not go into redundant iterations
+        {
+            break;
+        }
+        
+    }
+    return arrayOfNumbers;
+    
 }
 
 /***** DO NOT EDIT AFTER THIS LINE *****/
