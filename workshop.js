@@ -1,9 +1,19 @@
-function firstLetter(inputString) {
-
+function firstLetter(inputString) 
+{
+    if (inputString == undefined)
+    {
+        return undefined;
+    }
+    return inputString.charAt(0);
 }
 
-function lastLetter(inputString) {
-
+function lastLetter(inputString)
+{
+    if (inputString == undefined || inputString.length === 0)
+    {
+        return undefined;
+    }
+    return inputString.charAt(inputString.length-1);
 }
 
 function letterAtPosition(inputString, position) {
