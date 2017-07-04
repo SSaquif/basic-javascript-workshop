@@ -235,35 +235,41 @@ function wrapCharacter(inputString) {
 }
 
 function wrapWord(inputString) {
-    var count = 1;
-    var outputString = '';
+    var wordArray = inputString.split(' ');  //Array of the words
     var tempString = '';
-    var smallWord1, smallWord2, bigWord = 0;
-    var wordArray = inputString.split(' ');
-    //var largeWordIndex = [];
+    var outputString = '';
     
-    //for (var word in wordArray)
-    for (var i = 0; i < wordArray.length-1; i++)
+    for (var wordIndex = 0; wordIndex < wordArray.length -1; wordIndex++)
     {
-        if (wordArray[i].length > 40)
+        var prevWordIndex = wordIndex -1;
+        var smallWord1, smallWord2 = 0; 
+        if(wordArray[wordIndex].length >= 40)
         {
-            wordArray[i] = "\n" + wordArray[i] + "\n";
-            bigWord = i;
-            for (var j = smallWord1; j < bigWord; j++)
+            smallWord1 = wordIndex + 1;
+            smallWord2 = wordIndex + 1;
+            if(prevWordIndex < 0) // if no previous words
             {
-                tempString += ' ' + wordArray[j];
-                //outputString += tempString;
+                outputString = outputString + ' ' + wordArray[wordIndex] + '\n';
+                console.log(outputString);
             }
-            smallWord2 = bigWord + 1;
-            tempString = wrapCharacter(tempString) + wordArray[bigWord];
-            outputString += tempString;
+            else
+            {
+                outputString = outputString + ' \n' + wordArray[wordIndex] + '\n';
+                console.log(outputString);
+            }
         }
         else
         {
-            tempString += wordArray[i];
-            tempString = wrapCharacter(tempString);
+            smallWord2 = wordIndex;
+            for(var i = smallWord1; i <= smallWord2; i++)
+            {
+                tempString = tempString + wordArray[i];
+                console.log(outputString);
+            }
             
+            outputString = outputString + wrapCharacter(tempString);
         }
+        
     }
     console.log(outputString);
     return outputString;
