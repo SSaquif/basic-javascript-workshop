@@ -235,7 +235,38 @@ function wrapCharacter(inputString) {
 }
 
 function wrapWord(inputString) {
-
+    var count = 1;
+    var outputString = '';
+    var tempString = '';
+    var smallWord1, smallWord2, bigWord = 0;
+    var wordArray = inputString.split(' ');
+    //var largeWordIndex = [];
+    
+    //for (var word in wordArray)
+    for (var i = 0; i < wordArray.length-1; i++)
+    {
+        if (wordArray[i].length > 40)
+        {
+            wordArray[i] = "\n" + wordArray[i] + "\n";
+            bigWord = i;
+            for (var j = smallWord1; j < bigWord; j++)
+            {
+                tempString += ' ' + wordArray[j];
+                //outputString += tempString;
+            }
+            smallWord2 = bigWord + 1;
+            tempString = wrapCharacter(tempString) + wordArray[bigWord];
+            outputString += tempString;
+        }
+        else
+        {
+            tempString += wordArray[i];
+            tempString = wrapCharacter(tempString);
+            
+        }
+    }
+    console.log(outputString);
+    return outputString;
 }
 
 function bubbleSort(arrayOfNumbers) {
